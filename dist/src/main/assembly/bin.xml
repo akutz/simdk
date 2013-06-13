@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly
+    xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.parent.basedir}/src/site/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>README.txt</include>
+                <include>LICENSE.txt</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/db/target</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*-${project.version}-jar-with-dependencies.jar</include>
+                <include>*.sh</include>
+                <include>*.bat</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/viexport/target</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*-${project.version}-jar-with-dependencies.jar</include>
+                <include>*.sh</include>
+                <include>*.bat</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.parent.basedir}/ws/target</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*-${project.version}.war</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>

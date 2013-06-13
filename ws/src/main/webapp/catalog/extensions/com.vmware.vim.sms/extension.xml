@@ -1,0 +1,23 @@
+<config>
+   <extension>
+      <name>com.vmware.vim.sms</name>
+      <!--
+      Client plugin declares assembly attribute SupportedServerApiVersion 
+      that VI Client uses when deciding whether the plugin is compatible
+      with server extension.
+      When changing this value, make sure to modify the said attribute in 
+      AssemblyInfo.cs in plugin source code.
+      -->
+      <version>4.0</version>
+      <description>Storage Monitoring and Reporting</description>
+      <company>VMware Inc.</company>
+      <certificate>SSL/rui.crt</certificate>
+      <health>
+         <url>http://localhost/sms/smService-web/health.xml</url>
+      </health>
+      <privileges>
+         <privilege id="View" groupId="StorageViews"/>
+         <privilege id="ConfigureService" groupId="StorageViews"/>         
+      </privileges>
+   </extension>
+</config>

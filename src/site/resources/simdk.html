@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta name="description" content="SimDK a Hyper9 Production directed by Andrew Kutz Agenda Summary Simulation and Emulation Architecture Summary SimDK is virtual virtualization -- a software package that enables the simulation and emulation of the major players in the enterprise, virtualization market. Simulation and Emulation vSphere Client vSphere PowerCLI Perl vSphere 4 Simulated VMware vSphere Client vSphere PowerCLI Perl Simulated vSphere 4 Simulation Uses QA and Testing API Compatibility Testing Load and Scale Testing Emulated Xen vSphere Client vSphere PowerCLI Perl Citrix XenServer 5.5 Emulation Uses Simplify multi-platform compatibility Reuse of proven management tools Reuse of proven best practices Architecture SimDK uses proven, enterprise technology.          MySQL Hibernate (JPA) Jetty (JAX-WS)  Client(s) JAXB  JAAS Building a Simulator The codegen package is used to generate the portable web service artifacts that simulate the vSphere API. Next, the db engine creates the database that powers SimDK. The entire vSphere object graph is transferred to the SimDK database using the viexport tool. Finally, vSphere clients connect to our web service (ws) as if they were communicating with a real vSphere instance. Request and Response Client Request Web Service Hibernate Database The client sends a request. The request is processed by the web service. The web service fetches the object(s) from the database using Hibernate. The objects are serialized to XML via their JAXB annotations. The response is sent back to the client. Response Developer Notes The entire project is managed by Maven. The entire build cycle is fully automated. The entire project is built and managed with open-source tools. Conclusion SimDK allows you to simulate and emulate a virtualized environment from the perspective of the API. SimDK is virtual virtualization. If you have any questions, feel free to e-mail akutz@users.sourceforge.net."/>
+    <title></title>
+    <script type="text/javascript" language="javascript">
+//      <![CDATA[
+            var images = new Array (13);
+            images[0] = "images/simdk-presentation/SimDK.001-001.png";
+            images[1] = "images/simdk-presentation/SimDK.002-001.png";
+            images[2] = "images/simdk-presentation/SimDK.003-001.png";
+            images[3] = "images/simdk-presentation/SimDK.004-001.png";
+            images[4] = "images/simdk-presentation/SimDK.005-001.png";
+            images[5] = "images/simdk-presentation/SimDK.006-001.png";
+            images[6] = "images/simdk-presentation/SimDK.007-001.png";
+            images[7] = "images/simdk-presentation/SimDK.008-001.png";
+            images[8] = "images/simdk-presentation/SimDK.009-001.png";
+            images[9] = "images/simdk-presentation/SimDK.010-001.png";
+            images[10] = "images/simdk-presentation/SimDK.011-001.png";
+            images[11] = "images/simdk-presentation/SimDK.012-001.png";
+            images[12] = "images/simdk-presentation/SimDK.013-001.png";
+            var index = 0;
+            function WindowLoaded(evt)
+            {
+                document.body.onselectstart = function () { return false; };
+            }
+            function Step(i)
+            {
+                GoTo(index + i)
+            }
+            function GoTo(newIndex)
+            {
+                if(newIndex >= 0 && newIndex < images.length)
+                {
+                    index = newIndex;
+                    document.Slideshow.src = images[index];
+                }
+            }
+//      ]]>
+    </script>
+</head>
+<body bgcolor="black" onload='WindowLoaded(event);'>
+    <p align="center">
+        <br/>
+        <br/>
+        <img name="Slideshow" alt="" src="images/simdk-presentation/SimDK.001-001.png" onclick="Step(1)"/>
+        <br/>
+        <br/>
+        <input type="image" src="images/simdk-presentation/home.png" onclick="GoTo(0)"/>
+        &nbsp;&nbsp;&nbsp;
+        <input type="image" src="images/simdk-presentation/prev.png" onclick="Step(-1)"/>
+        <input type="image" src="images/simdk-presentation/next.png" onclick="Step(1)"/>
+    </p>
+</body>
+</html>

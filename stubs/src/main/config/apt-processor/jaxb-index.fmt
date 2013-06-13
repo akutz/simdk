@@ -1,0 +1,8 @@
+<@forAllPackages var="package">
+    <@file package="${package.qualifiedName}" name="jaxb.index">
+        <@forAllTypes var="type" annotation="com.hyper9.simdk.stubs.JAXBAnnotated">
+${type.simpleName}
+        </@forAllTypes>
+        
+    </@file>
+</@forAllPackages>

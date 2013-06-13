@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<extension>
+		<name>com.vmware.vim.stats.report</name>
+		<version>1.0.0</version>
+		<description>Performance charts built-in extension.</description>
+
+		<servers>
+			<server>
+				<url>https://kennebunkport.east.hyper9.com:8443/statsreport/vicr.do</url>
+				<description>STATs extension entry point</description>
+				<company>VMware, Inc.</company>
+				<type>HTTP</type>
+			</server>
+		</servers>
+	</extension>
+</config>

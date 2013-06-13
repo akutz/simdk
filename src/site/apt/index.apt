@@ -1,0 +1,60 @@
+ -----
+ SimDK
+ -----
+ Schley Andrew Kutz ~ sakutz at gmail
+ -----
+ 2010/03/05
+ -----
+ 
+~~ http://maven.apache.org/doxia/references/apt-format.html
+
+  SimDK is a VMware vSphere4 simulator which provides vSphere4 API-compatibility 
+  for official vSphere4 clients and other applications built using the vSphere4 SDK.
+  
+Download
+
+  * Snapshots
+  
+    * 0.0.1-SNAPSHOT - {{{https://sourceforge.net/projects/simdk/files/snapshots/simdk-0.0.1-SNAPSHOT-bin.tar.gz/download}tar.gz}}, {{{https://sourceforge.net/projects/simdk/files/snapshots/simdk-0.0.1-SNAPSHOT-bin.zip/download}zip}}
+    
+Demo
+
+  A short video demonstration of SimDK is available on the 
+  {{{http://www.youtube.com/watch?v=dmqD_5IH3nc}YouTube}} (4:35).
+      
+Overview
+
+  A presentation has been assembled that reviews SimDK at a very high level and 
+  is available in multiple formats:
+  
+  * {{{http://www.youtube.com/watch?v=oye2dTJ0Yao}video}} (6:16)
+  
+  * {{{./simdk.pdf}pdf}}
+  
+  * {{{./simdk.html}html}}
+  
+  []
+  
+  The recommended version is the video format because it includes a voice-over
+  explaining the content that is being presented.
+  
+Features
+
+  SimDK provides developers and administrators with many useful features:
+  
+  * <<Simulation>> - SimDK allows developers to configure VMware clients and 
+  SDKs to talk to a locally hosted, simulate environment.
+  
+  []
+  
+  * <<Emulation>> - It is possible for SimDK to provide a vSphere4 compatible 
+  interface on the front-end while the back-end is configured to communicate with 
+  a third-party hypervisor such as Microsoft Hyper-V or Citrix XenServer. 
+  
+  []
+  
+  * <<Learning>> - If nothing else, SimDK offers the most insight for developers
+  into the inner-workings of the vSphere SDK. If developers are interested in 
+  exploring how the vSphere SDK was built, they can browse the SimDK source code
+  and learn how a simulator was reverse engineered to behave the same way from
+  nothing more than the vSphere documentation.

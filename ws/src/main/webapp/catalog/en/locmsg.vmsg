@@ -1,0 +1,29 @@
+# en_US resources
+signature="sIgNaTuRe"
+
+# 
+# Licensing faults
+com.vmware.vim.license.error.featureUnavailable = "Feature {tag} not licensed, requires {need} have {have}"
+com.vmware.vim.license.error.featureMissing = "Feature {tag} is not licensed with this edition"
+com.vmware.vim.license.error.evalPeriodOver = "Evaluation period is over, {info.@enum.com.vmware.vim.license.msgs}"
+com.vmware.vim.license.error.LicenseExpired = "License Expired, {info.@enum.com.vmware.vim.license.msgs}"
+com.vmware.vim.license.error.BadInput = "License subsystem was called with invalid argument {vm}"
+com.vmware.vim.license.error.nolicense = "Need to install a license to use this product"
+
+# Feature names defined in enum.vmsg
+com.vmware.vim.license.features.info = "{feature.@enum.com.vmware.vim.license.Feature}"
+
+#
+vim.hostd.vdisksvc.diskNotThinProvisioned = "The disk is not thin-provisioned."
+vim.hostd.vdisksvc.diskNotZeroedThick = "The disk is not zeroed-thick."
+vim.hostd.vdisksvc.noIOBeyondEndOfDisk= "Cannot perform IO beyond end of the virtual disk."
+vim.hostd.vdisksvc.doesNotStartAtSectorZero = "Operation does not begin at sector 0."
+vim.hostd.vdisksvc.badReparentSpec = "The reparent spec is invalid."
+vim.hostd.vdisksvc.cannotMarkParentReadonly = "Cannot mark parent disk as read-only."
+vim.hostd.vdisksvc.diskSizeTooSmall = "The virtual disk size is too small."
+
+# Start NPIV related messages
+com.vmware.vim.npiv.lessNodeWwn.label = "Requested Node WWNs number {num1} should be greater than existing numbers {num2} in VM"
+com.vmware.vim.npiv.lessPortWwn.label = "Requested Port WWNs number {num1} should be greater than existing numbers {num2} in VM"
+# End NPIV related messages
+

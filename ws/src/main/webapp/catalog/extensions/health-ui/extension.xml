@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <extension>
+      <name>health-ui</name>
+      <version>4.0</version>
+      <company>VMware, Inc.</company>
+      <description>
+         <label>vCenter Service Status</label>
+         <summary>Displays the health status of vCenter services</summary>
+      </description>
+      <certificate>ssl\rui.crt</certificate>
+      <keyFile>ssl\rui.key</keyFile>
+      <servers>
+         <server>
+		      <url>https://kennebunkport.east.hyper9.com:8443/health-ui/scriptConfig.xml</url>
+		      <description>health-ui</description>
+		      <company>VMware, Inc.</company>
+		      <type>com.vmware.vim.viClientScripts</type>
+		      <adminEmail>noreply@vmware.com</adminEmail>
+         </server>
+      </servers>
+   </extension>
+</config>

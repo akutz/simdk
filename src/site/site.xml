@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SimDK">
+    <skin>
+        <groupId>com.hyper9</groupId>
+        <artifactId>hyper9-skin</artifactId>
+        <version>0.0.2</version>
+    </skin>
+    <body>
+        <links>
+            <item name="SimDK Home" href="http://simdk.sourceforge.net/" />
+            <item name="SimDK Project" href="http://sourceforge.net/projects/simdk/" />
+            <item name="Hyper9" href="http://www.hyper9.com/" />
+        </links>
+        <menu name="SimDK">
+            <item name="Overview" href="index.html" />
+            <item name="Installing" href="installing.html" />
+            <item name="Building" href="building.html" />
+            <item name="JavaDocs" href="/apidocs/index.html" />
+        </menu>
+        <menu ref="reports" />
+    </body>
+</project>

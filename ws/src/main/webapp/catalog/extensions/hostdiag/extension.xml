@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <extension>
+      <name>hostdiag</name>
+      <version>1.0</version>
+      <description>Internal extension to declare diagnostic events from VMware Host systems.</description>
+      <events>
+         <event id="vprob.net.connectivity.lost">
+            <EventType>
+               <eventTypeID>vprob.net.connectivity.lost</eventTypeID>
+               <description>Lost Network Connectivity</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- name -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- nicname -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- portgroups -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.net.redundancy.lost">
+            <EventType>
+               <eventTypeID>vprob.net.redundancy.lost</eventTypeID>
+               <description>Lost Network Redundancy</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- name -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- nicname -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- portgroups -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.net.redundancy.degraded">
+            <EventType>
+               <eventTypeID>vprob.net.redundancy.degraded</eventTypeID>
+               <description>Network Redundancy Degraded</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- name -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- nicname -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- uplinkcount -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>4</name> <!-- portgroups -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.storage.connectivity.lost">
+            <EventType>
+               <eventTypeID>vprob.storage.connectivity.lost</eventTypeID>
+               <description>Lost Connectivity to Storage</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- name -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- pathname -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- datastore name -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.storage.redundancy.lost">
+            <EventType>
+               <eventTypeID>vprob.storage.redundancy.lost</eventTypeID>
+               <description>Lost Redundancy in Storage Path</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- name -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- pathname -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- datastore name -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.storage.redundancy.degraded">
+            <EventType>
+               <eventTypeID>vprob.storage.redundancy.degraded</eventTypeID>
+               <description>Degraded Redundancy in Storage Path</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- name -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- pathname -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- activepaths -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>4</name> <!-- datastore name -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.net.e1000.tso6.notsupported">
+            <EventType>
+               <eventTypeID>vprob.net.e1000.tso6.notsupported</eventTypeID>
+               <description>No IPV6 TSO support</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- VM name -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.net.migrate.bindtovmk">
+            <EventType>
+               <eventTypeID>vprob.net.migrate.bindtovmk</eventTypeID>
+               <description>Invalid vmknic specified in /Migrate/Vmknic</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- vmknic -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.journal.createfailed">
+            <EventType>
+               <eventTypeID>vprob.vmfs.journal.createfailed</eventTypeID>
+               <description>No Space To Create VMFS Journal</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- volumeName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.heartbeat.timedout">
+            <EventType>
+               <eventTypeID>vprob.vmfs.heartbeat.timedout</eventTypeID>
+               <description>VMFS Volume Connectivity Degraded</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- volumeName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.heartbeat.recovered">
+            <EventType>
+               <eventTypeID>vprob.vmfs.heartbeat.recovered</eventTypeID>
+               <description>VMFS Volume Connectivity Restored</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- volumeName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.heartbeat.unrecoverable">
+            <EventType>
+               <eventTypeID>vprob.vmfs.heartbeat.unrecoverable</eventTypeID>
+               <description>VMFS Volume Connectivity Lost</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- volumeName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.lock.corruptondisk">
+            <EventType>
+               <eventTypeID>vprob.vmfs.lock.corruptondisk</eventTypeID>
+               <description>VMFS Lock Corruption Detected</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- volumeName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.resource.corruptondisk">
+            <EventType>
+               <eventTypeID>vprob.vmfs.resource.corruptondisk</eventTypeID>
+               <description>VMFS Resource Corruption Detected</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- volumeName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.volume.locked">
+            <EventType>
+               <eventTypeID>vprob.vmfs.volume.locked</eventTypeID>
+               <description>Volume Locked By Remote Host</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- deviceName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- remoteHostIP -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.nfs.server.disconnect">
+            <EventType>
+               <eventTypeID>vprob.vmfs.nfs.server.disconnect</eventTypeID>
+               <description>Lost connection to NFS server</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- serverName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- remotePathName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>4</name> <!-- mountPointName -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="vprob.vmfs.nfs.server.restored">
+            <EventType>
+               <eventTypeID>vprob.vmfs.nfs.server.restored</eventTypeID>
+               <description>Restored connection to NFS server</description>
+               <arguments>
+                  <argument>
+                     <name>1</name> <!-- serverName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>2</name> <!-- remotePathName -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>3</name> <!-- volumeLabel -->
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>4</name> <!-- mountPointName -->
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+      </events>
+   </extension>
+</config>
+
+

@@ -1,0 +1,10 @@
+signature = "sIgNaTuRe"
+
+# this label and summary will go into the top-level Extension.description.
+com.vmware.vim.stats.report.label = Performance charts built-in extension.
+com.vmware.vim.stats.report.summary = Performance charts built-in extension.
+
+# if server <type> http is declared
+# this label and summary will go into the Extension.ServerInfo.description.
+com.vmware.vim.stats.report.server.HTTP.label = STATs extension entry point
+com.vmware.vim.stats.report.server.HTTP.summary = STATs extension entry point

@@ -1,0 +1,75 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>com.hyper9.simdk.ws</display-name>
+
+    <!-- Filters -->
+    <filter>
+        <filter-name>firstInLastOutFilter</filter-name>
+        <filter-class>com.hyper9.simdk.ws.filters.FiloFilter</filter-class>
+    </filter>
+    
+    <filter>
+        <filter-name>wsdlFilter</filter-name>
+        <filter-class>com.hyper9.simdk.ws.filters.WsdlFilter</filter-class>
+    </filter>
+    
+    <filter>
+        <filter-name>requestAndResponseFilter</filter-name>
+        <filter-class>com.hyper9.simdk.ws.filters.RequestAndResponseFilter</filter-class>
+    </filter>
+    
+    <filter>
+        <filter-name>namespaceNormalizerFilter</filter-name>
+        <filter-class>com.hyper9.simdk.ws.filters.NamespaceNormalizerFilter</filter-class>
+    </filter>
+
+    <!-- Filter Mappings -->
+    <filter-mapping>
+        <filter-name>firstInLastOutFilter</filter-name>
+        <servlet-name>vimService</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>wsdlFilter</filter-name>
+        <servlet-name>vimService</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>requestAndResponseFilter</filter-name>
+        <servlet-name>vimService</servlet-name>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>namespaceNormalizerFilter</filter-name>
+        <servlet-name>vimService</servlet-name>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>
+            com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+        </listener-class>
+    </listener>
+
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>vimService</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>initAppServlet</servlet-name>
+        <servlet-class>com.hyper9.simdk.ws.InitApplicationServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- Servlet Mappings -->
+    <servlet-mapping>
+        <servlet-name>vimService</servlet-name>
+        <url-pattern>/sdk/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>

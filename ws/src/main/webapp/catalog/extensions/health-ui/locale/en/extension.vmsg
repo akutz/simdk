@@ -1,0 +1,7 @@
+signature = "sIgNaTuRe"
+
+health-ui.label = "vCenter Service Status"
+health-ui.summary = "Displays the health status of vCenter services"
+
+health-ui.server.com.vmware.vim.viClientScripts.label = "vCenter Service Status"
+health-ui.server.com.vmware.vim.viClientScripts.summary = "Displays the health status of vCenter services"

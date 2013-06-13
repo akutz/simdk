@@ -1,0 +1,151 @@
+ -----
+ Building
+ -----
+ Schley Andrew Kutz ~ sakutz at gmail
+ -----
+ 2010/03/09
+ -----
+ 
+~~ http://maven.apache.org/doxia/references/apt-format.html
+
+  Here are the steps for building SimDK from source.
+
+Maven 3
+
+  SimDK is built with Maven 3. Although Maven 3 has not officially been 
+  released yet, it was necessary to use a pre-release version of Maven 3
+  to manage SimDK's builds due to a bug in Maven 2 that was not fixed until
+  Maven 3 (where ${basedir} was not interpolated in a build profile's 
+  activation sceheme). You can get the latest version of Maven 3 at
+  the {{{http://maven.apache.org/download.html}Maven website}}.
+  
+  Of course, because the Site plug-in is not compatible with Maven 3
+  yet (due to the decoupling of Doxia from the Maven Core), you will still
+  need to use Maven 2 to build the SimDK's site.
+  
+VMware Dependencies
+
+  SimDK has many dependencies, and almost all of them are available via the
+  central Maven repository or repositories specified in the SimDK parent
+  POM file. However, the SimDK code generation module relies on some vSphere4
+  JAR files that are included with the vSphere4 deployment (as well as a packaged
+  version of the 
+  {{{http://www.vmware.com/support/developer/vc-sdk/visdk400pubs/ReferenceGuide/index.html}publicly available vSphere4 SDK documentation}},
+  but that has been placed on an
+  included repository for your convenience). Because it may require
+  redistribution rights to make the vCenter JAR files available, rights
+  that this project does not have, said JARs are not available via any
+  of this project's included repositories.
+  
+  However, here are the instructions on how to recreate said JARs.
+  
+  [[1]] Download the {{{http://downloads.vmware.com/d/details/vc40u1/ZHcqYmQlcCpiZGUlaA==}free vSphere4 evaluation}} 
+  from VMware. Make sure you download the zip file and not the ISO.
+  
+  [[2]] Inflate the zip file.
+  
+  [[3]] Inflate the WAR file <<<webAccess.war>>> that should be at the root of
+  the zip file's contents with the following command:
+  
+---
+jar xf webAccess.war
+---
+
+  [[4]] Change directories into <<<WEB-INF/lib>>>.
+  
+  [[5]] The first JAR you need is toolkit-api.jar. Install it to your local
+  Maven repository with the following command. The groupId, artifactId, and 
+  version are very important as the SimDK codegen and stubs modules include 
+  the toolkit-api JAR as a provided dependency (non-transitive) by these 
+  values:
+  
+---
+mvn install:install-file -Dfile=toolkit-api.jar \
+                         -DgroupId=com.vmware \ 
+                         -DartifactId=toolkit-api \
+                         -Dversion=4.0 \
+                         -DgeneratePom=true
+---
+
+  [[6]] The second JAR you need is internalvim25stubs.jar. Install it to your
+  local Maven repository with the following command:
+  
+---
+mvn install:install-file -Dfile=internalvim25stubs.jar \
+                         -DgroupId=com.vmware \
+                         -DartifactId=internalvim25stubs \
+                         -Dversion=4.0 \ 
+                         -DgeneratePom=true
+---
+
+  [[7]] The third JAR you need is a little trickier, because you actually need
+  the sources for the classes in the internalvim25stubs JAR. SimDK does not
+  use any VMware code in production, but it is needed in order to generate 
+  an accurate JSR-like interface for SimDK's own portable web service artifacts.
+  
+    [[a]] In order to generate source files for the internalvim25stubs JAR you will need
+    to download the program {{{http://java.decompiler.free.fr/}JD-GUI}}, a graphical
+    Java decompiler. 
+    
+    [[b]] Use JD-GUI to generate sources from the internalvim25stubs 
+    JAR file and then package those sources as their own JAR file, we'll call it
+    internalvim25stubs-sources.jar.
+    
+    [[c]] Install the internalvim25stubs sources JAR to your local Maven repository
+    with the following command:
+    
+---
+mvn install:install-file -Dfile=internalvim25stubs-sources.jar \
+                         -DgroupId=com.vmware \
+                         -DartifactId=internalvim25stubs \
+                         -Dversion=4.0 \ 
+                         -Dclassifier=sources \
+                         -DgeneratePom=true
+---
+
+  [[8]] And that's it! You should only have to repeat those steps once for any
+  system you build SimDK on. Of course, once you create your own copies of
+  VMware's JARs, you could always install them to a private repository :)
+  
+Building SimDK
+  
+  [[1]] Check out the source code from SourceForge with the following command:
+
+---
+svn co https://simdk.svn.sourceforge.net/svnroot/simdk simdk
+---
+
+  [[2]] It is not possible to build the entire project at once (at least
+  the first time) with unit tests turned on, because the <<<db>>> module connects
+  to the database for testing, and you need to build the <<<stubs>>> module in
+  order to create the database schema. So for now simply type the following to
+  ensure all of your dependencies resolve:
+  
+---
+mvn install -DskipTests
+---
+
+  [[3]] You may need to work through some dependency issues, but other than that
+  SimDK should have compiled. What actually happened?
+  
+    [[a]] The <<<codegen>>> module is compiled.
+    
+    [[b]] The <<<stubs>>> module is processed.
+    
+      [[i]] The <<<stubs>>> module uses the <<<codegen>>> module to process the
+      VMware internal stubs and create its own SimDK stubs and placed the results
+      in the <<<stubs>>> module's <<<generate-sources>>> area.
+      
+      [[ii]] wsgen is used to create a WSDL and portable artifacts from the web
+      service stubs.
+      
+      [[iii]] The <<stubs>> module is compiled.
+      
+    [[c]] The <<<db>>> module is compiled.
+    
+    [[d]] The <<<viexport>>> module is compiled.
+    
+    [[e]] The <<<ws>>> module is compiled.
+    
+    [[f]] The <<<dist>>> module uses the assembly plug-in to assemble the output
+    of all the other modules into redistributable, compressed archives.

@@ -1,0 +1,13 @@
+signature="sIgNaTuRe"
+#
+# Example1.label	= "Example enum label"
+# Example1.summary	= "Example enum summary"
+#
+com.vmware.license.LicenseAssignError.InvalidProduct.label            = "The license key entered is not valid for this product"
+com.vmware.license.LicenseAssignError.InvalidProduct.summary          = "The license key entered is not valid for this product"
+com.vmware.license.LicenseAssignError.Expired.label                   = "The license key entered has expired"
+com.vmware.license.LicenseAssignError.Expired.summary                 = "The license key entered has expired"
+com.vmware.license.LicenseAssignError.Other.label                     = "The license key entered does not have enough capacity or vendor checks failed"
+com.vmware.license.LicenseAssignError.Other.summary                   = "The license key entered does not have enough capacity or vendor checks failed"
+com.vmware.license.LicenseAssignError.Unknown.label                   = "The license key can not be assigned"
+com.vmware.license.LicenseAssignError.Unknown.summary                 = "The license key can not be assigned"

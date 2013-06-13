@@ -1,0 +1,18 @@
+# en_US resources
+signature="sIgNaTuRe"
+
+reason.antiAffin.summary                                    = "Apply anti-affinity rule"
+reason.fairnessCpuAvg.summary                               = "Balance average CPU loads"
+reason.fairnessMemAvg.summary                               = "Balance average memory loads"
+reason.hostMaint.summary                                    = "Host is entering maintenance mode"
+reason.enterStandby.summary                                 = "Host is entering standby mode"
+reason.increaseCapacity.summary                             = "Power On host to increase cluster capacity"
+reason.jointAffin.summary                                   = "Apply affinity rule"
+reason.powerOnVm.summary                                    = "Power On virtual machine"
+reason.powerSaving.summary                                  = "Power Off host for power savings"
+reason.reservationCpu.summary                               = "Balance CPU reservations"
+reason.reservationMem.summary                               = "Balance memory reservations"
+reason.checkResource.summary                                = "Check resource pool hierarchy"
+reason.unreservedCapacity.summary                           = "Maintain unreserved capacity"
+reason.colocateCommunicatingVM.summary                      = "Co-locate communicating VMs"
+reason.balanceNetworkBandwidthUsage.summary                 = "Balance average network bandwidth utilization"

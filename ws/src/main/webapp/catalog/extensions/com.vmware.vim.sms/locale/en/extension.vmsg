@@ -1,0 +1,13 @@
+signature = "sIgNaTuRe"
+
+com.vmware.vim.sms.label = "vCenter Storage Monitoring"
+com.vmware.vim.sms.summary = "Storage Monitoring and Reporting"
+
+com.vmware.vim.sms.svcNotOperational = "Service not operational"
+com.vmware.vim.sms.svcInitInProgress = "Service initializing..."
+com.vmware.vim.sms.svcInitFailed = "Service initialization failed"
+com.vmware.vim.sms.provSyncInProgress = "Provider sync in progress..."
+com.vmware.vim.sms.provSyncFailed = "Provider sync failed"
+com.vmware.vim.sms.svcOperational = ""
+
+

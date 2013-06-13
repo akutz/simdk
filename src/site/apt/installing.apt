@@ -1,0 +1,308 @@
+ -----
+ Installation
+ -----
+ Schley Andrew Kutz ~ sakutz at gmail
+ -----
+ 2010/03/08
+ -----
+ 
+~~ http://maven.apache.org/doxia/references/apt-format.html
+
+  Here are the steps for getting SimDK up and running on an Unix-based/derived or Windows system.
+  
+Download SimDK
+
+  [[1]] Download the binary package from the {{{index.html}homepage}} or the 
+  {{{https://sourceforge.net/projects/simdk/files/}SimDK Files}} page at
+  SourceForge.
+  
+  [[2]] Inflate the file into a directory of your choice.
+  
+  [[3]] The current version of the binary package unfortunately only contains
+  startup files for Unix-based/derived systems. The project does build batch
+  startup files but they were not included in the distributed binary packages.
+  
+     [[a]] To create batch files, simply copy the <<<.sh>>> files to new files with the
+     same name but the extension <<<.bat>>>. 
+  
+     [[b]] Open each of the files with notepad and remove the first line, 
+     the one that reads <<<#!/bin/sh>>>.
+     
+     [[c]] Change the text <<<$*>>> at the end of the remaining line to <<<%*>>> 
+     
+     [[d]] Save the file and exit the editor.
+  
+The Package's Contents
+
+  The inflated package contains several files:
+  
+*-------------------------------------------------+--------+
+ LICENSE.txt                                      | The license file.
+*-------------------------------------------------+--------+
+ README.txt                                       | The readme file.
+*-------------------------------------------------+--------+
+ db.sh (or db.bat)                                | This script runs the database jar.
+*-------------------------------------------------+--------+
+ viexport.sh (or viexport.bat)                    | This script runs the viexport jar.
+*-------------------------------------------------+--------+
+ simdk-db-VERSION-jar-with-dependencies.jar       | This jar file contains an executable application that 
+                                                  | assists in initializing the SimDK database.
+*-------------------------------------------------+--------+
+ simdk-viexport-VERSION-jar-with-dependencies.jar | This jar file contains an executable application that
+                                                  | assists in exporting an existing vSphere4 object
+                                                  | graph into the SimDK database.
+*-------------------------------------------------+--------+
+ simdk-ws-VERSION.war                             | This is the SimDK web service that takes the place of
+                                                  | vSphere4 SDK web service.
+*-------------------------------------------------+--------+
+
+  One important commonality between the db program, viexport program, and the web service
+  is that they all expect a connection to a database. This connection is established
+  via a Hibernate configuration file. This file can be specified on the command line
+  for the db and viexport programs or placed in the web application's <<<conf>>> directory
+  as <<<hibernate.cfg.xml>>>. If no Hibernate configuration file is specified then the
+  programs and web service will expect to connect to a databased called <<<db_simdk>>> on
+  a local MySQL5 server with the credentials <<<root>>> and <<<password>>>.
+  
+  An example of the hibernate.cfg.xml file follows:
+  
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+                "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/db_simdk</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">1800</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
+    </session-factory>
+</hibernate-configuration>
+---
+
+  One important option to note is the value for <<<hibernate.hbm2ddl.auto>>>. This should
+  likely only be set to <<<create>>> for the db program, otherwise the entire database
+  will be deleted when SimDK connects to it. For the viexport program and the SimDK
+  web service the <<<hibernate.hbm2ddl.auto>>> should be set to an empty string or
+  omitted altogether (this is the default).
+  
+  Also, all of SimDK's components are bundled with support for connecting to a 
+  MySQL5 server
+  
+Initializing The Database
+
+  SimDK requires a database server that has a Hibernate-supported dialect. You 
+  can see which database servers are supported at {{{https://www.hibernate.org/80.html}hibernate.org}}.
+  
+  I recommend that you use MySQL5 simply because its connector is included in the 
+  JAR files, and if you choose to use a different database server for trialing SimDK then
+  you will need to explode the JAR files, add the connector's JAR file into the exploded
+  content directories, and then re-create the JAR files.
+  
+  Once you select your database server you will need to create a database. I recommend
+  you call it <<<db_simdk>>> because that is how this documentation will refer to it.
+  
+  [[1]] Create a database and call it <<<db_simdk>>>.
+  
+  [[2]] Create an account that has access to the database that you just created.
+  
+  [[3]] Open a command prompt and change directories to the location of the exploded
+  package contents.
+  
+  [[4]] If you are connecting to a MySQL5 locally hosted database named <<<db_simdk>> then
+  you can skip this step. Otherwise you need to create a file called <<<hibernate.cfg.xml>>> and
+  edit it to contain the contents listed in the XML above. You'll need to edit the following
+  values:
+  
+    [[a]] <<hibernate.dialect>> - The name of the database dialect used to the database.
+    
+    [[b]] <<hibernate.connection.driver_class>> - The name of the driver used to 
+    connect to the database.
+    
+    [[c]] <<hibernate.connection.url>> - The JDBC URL used to connect to the database.
+    
+    [[d]] <<hibernate.connection.username>> - The user name used to connect to the database.
+    
+    [[e]] <<hibernate.connection.password>> - The password used to connect to the database.
+    
+    [[f]] <<hibernate.hbm2ddl.auto>> - Set this to <<<create>>> for now.
+    
+  [[5]] Run <<<db.sh>>> (or <<<db.bat>>> if you're on Windows) with the argument <<<-h>>>.
+  You should see some text similar to the following:
+  
+---
+[0]akutz@legacy:tmp$ ./db.sh -h
+
+Missing argument for option: h
+
+usage: db [-h <hibernateConfig>]
+ -h,--hibernateConfig <hibernateConfig>   the path to a hibernate
+                                          configuration file used to
+                                          persist the collected data
+---
+
+  The db program can be executed without the <<<-h>>> option and argument, but if it 
+  is it will attempt to initialize the SimDK database with the default settings 
+  (discussed above). Instead, let's use the file you created by executing the db
+  program with the following command.
+  
+---
+./db.sh -h hibernate.cfg.xml
+---
+
+  The above command will have either bombed out because you don't have enough memory,
+  or it will have created the SimDK database schema. Assuming its the latter,
+  let's continue to the next section.
+  
+Exporting An Existing vSphere4 Server
+
+  [[1]] First and foremost, edit the <<<hibernate.cfg.xml>>> file and change the
+  <<<hibernate.hbm2ddl.auto>>> value to an empty string or remove the line 
+  altogether.
+  
+  [[2]] Now, run <<<viexport.sh>>> (or <<<viexport.bat>>> if you're on Windows). You 
+  should see some text similar to the following:
+  
+---
+[0]akutz@legacy:tmp$ ./viexport.sh 
+
+Missing required options: s, u, p
+
+usage: viexport [-e] [-h <arg>] [-l] -p <arg> -s <arg> [-t <arg>] -u <arg>
+ -e,--persist                 whether or not to persist the collected data
+                              using hibernate
+ -h,--hibernateConfig <arg>   the path to a hibernate configuration file
+                              used to persist the collected data
+ -l,--useSsl                  a flag indicating whether or not to use ssl
+ -p,--pass <arg>              the password to connect with
+ -s,--server <arg>            the vi server to connect to
+ -t,--port <arg>              the port to connect to the server on
+                              (defaults to 80 for non-SSL and 443 for SSL)
+ -u,--userName <arg>          the user name to connect with
+---
+
+  [[3]] In order to export an existing vSphere4 server's object graph to
+  the SimDK database, issue the following command, replacing SERVER, USER,
+  and PASSWORD with appropriate values for a given vSphere4 server:
+  
+---
+./viexport.sh -e -h hibernate.cfg.xml -s SERVER -u USER -p PASSWORD
+---
+
+  The above command will take a few minutes to complete. Grab a cup of
+  coffee or something while you wait. After it has completed you will have
+  a database chock full of vSphere4 goodness.
+  
+Installing the Web Service
+
+  [[1]] The SimDK web service requires a Java servlet container. SimDK 
+  was developed using {{{http://jetty.codehaus.org/jetty/}Jetty}}, but 
+  {{{http://tomcat.apache.org/}Tomcat}} should work just as well, or any other
+  {{{http://en.wikipedia.org/wiki/List_of_Servlet_containers}servlet container}} 
+  for that matter. 
+  
+  [[2]] Deploy the war file <<<simdk-VERSION.war>>> to your servlet container.
+  
+  [[3]] If you're satisfied with the default database configuration then 
+  congratulations, you've installed the SimDK web service. Otherwise proceed to
+  the next step.
+  
+  [[4]] Copy the <<<hibernate.cfg.xml>>> file you've created to one of the following
+  locations (the locations are searched in the following order):
+  
+    * The directory specified by the environment variable <<<COM.HYPER9.SIMDK.CONFIGDIRROOT>>>.
+    
+    * The directory <<</etc/simdk>>> (Sorry there is no Windows global configuration
+    directory equivalent in the current release).
+    
+    * The servlet container's <<<conf>>> directory.
+    
+  [[5]] The SimDK web service is now configured!
+  
+Testing SimDK
+
+  In order to test whether or no you have SimDK working properly you can use the
+  VMware vSphere4 PowerCLI.
+  
+  [[1]] Connect to the SimDK web service using the vSphere PowerCLI with the following
+  command where SERVER, PASSWORD, and PORT are the appropriate values. PROTOCOL should
+  be set to either <http> or <https> depending on how you've configured the servlet
+  container to host SimDK.
+  
+---
+Connect-VIServer -Server SERVER -User root -Password -Protocol PROTOCOL -Port PORT
+---
+
+  After you've connected you should receive a resonse similar to the following:
+  
+---
+Name                       Port                       User
+
+192.168.53.1               8080                       root
+---
+
+  [[2]] Try retrieving a list of VMs with the following command:
+  
+---
+Get-VM
+---
+
+  You should receive a response akin to the following:
+  
+---
+Name                 PowerState Num CPUs Memo
+
+Dazey                PoweredOn  2        2048
+10,000 Lakes         PoweredOn  1        1024
+Alvarado             PoweredOn  1        2048
+Ambrose              PoweredOn  1        2048
+Augusta              PoweredOn  1        2048
+Bismarck             PoweredOn  1        512
+Blaine               PoweredOn  1        512
+Cavalier             PoweredOn  1        1024
+Dexter               PoweredOn  1        1024
+Duluth               PoweredOn  1        1536
+Eagan                PoweredOn  4        2048
+Fargo                PoweredOn  1        2048
+Frenchville          PoweredOn  1        1024
+Harvey               PoweredOn  1        1024
+Kennebunkport        PoweredOn  1        1024
+Killdeer             PoweredOn  1        1536
+Kittery              PoweredOn  1        1024
+Lakota               PoweredOn  1        1024
+LinkedClone_of_Bi... PoweredOff 1        512
+LinkedClone_of_Bl... PoweredOn  1        512
+Maple Grove          PoweredOn  1        1024
+Maxfield             PoweredOn  1        512
+Minneapolis          PoweredOn  1        1024
+Minnetonka           PoweredOn  1        1024
+Minot                PoweredOn  1        1024
+Park River           PoweredOn  1        1024
+St-Cloud             PoweredOn  1        1024
+St-Paul              PoweredOn  1        2048
+thinprov-nd          PoweredOn  1        2048
+Franklin             PoweredOn  1        256
+---
+
+  [[3]] Finally, log out with the following command:
+  
+---
+Disconnect-VIServer
+---
+
+  []
+  
+  All the while you've been issuing commands, the SimDK web service
+  has been logging the requests and responses. Your web service log
+  (or stdout) will resemble the following 
+  {{{http://files.lostcreations.com/simdk-ws-stdout.txt}text}}.

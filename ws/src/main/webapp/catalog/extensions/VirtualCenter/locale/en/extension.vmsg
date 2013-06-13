@@ -1,0 +1,6 @@
+signature="sIgNaTuRe"
+
+# Extension declaration
+VirtualCenter.label = "VirtualCenter dynamic events and tasks"
+VirtualCenter.summary = "Extension for declaring dynamic events, tasks and faults from within the VirtualCenter server"
+

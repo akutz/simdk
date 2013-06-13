@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <extension>
+      <name>VirtualCenter</name>
+      <version>1.0</version>
+      <description>Built-in extension to declare dynamic VirtualCenter events, faults and tasks</description>
+      <certificate>ssl\rui.crt</certificate>
+8	
+      <keyFile>ssl\rui.key</keyFile>
+      <events>
+         <event id="com.vmware.vc.cim.CIMGroupHealthStateChanged">
+            <EventType>
+                <eventTypeID>com.vmware.vc.cim.CIMGroupHealthStateChanged</eventTypeID>
+                <description>Hardware Group Health Changed</description>
+                <arguments>
+                   <argument>
+                      <name>group</name>
+                      <type>string</type>
+                   </argument>
+                   <argument>
+                      <name>oldState</name>
+                      <type>string</type>
+                   </argument>
+                   <argument>
+                      <name>newState</name>
+                      <type>string</type>
+                   </argument>
+                </arguments>
+            </EventType>
+         </event>
+         <event id="com.vmware.license.AddLicenseEvent">
+            <EventType>
+               <eventTypeID>com.vmware.license.AddLicenseEvent</eventTypeID>
+               <description>Added license</description>
+               <arguments>
+                  <argument>
+                     <name>licenseKey</name>
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="com.vmware.license.RemoveLicenseEvent">
+            <EventType>
+               <eventTypeID>com.vmware.license.RemoveLicenseEvent</eventTypeID>
+               <description>Removed license</description>
+               <arguments>
+                  <argument>
+                     <name>licenseKey</name>
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="com.vmware.license.LicenseExpiryEvent">
+            <EventType>
+               <eventTypeID>com.vmware.license.LicenseExpiryEvent</eventTypeID>
+               <description>Expiry license</description>
+               <arguments>
+                  <argument>
+                     <name>remainingDays</name>
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="com.vmware.license.LicenseAssignFailedEvent">
+            <EventType>
+               <eventTypeID>com.vmware.license.LicenseAssignFailedEvent</eventTypeID>
+               <description>License assignment Failed</description>
+               <arguments>
+                  <argument>
+                     <name>errorMessage</name>
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>diagnostic</name>
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="com.vmware.license.AssignLicenseEvent">
+            <EventType>
+               <eventTypeID>com.vmware.license.AssignLicenseEvent</eventTypeID>
+               <description>Assigned license</description>
+               <arguments>
+                  <argument>
+                     <name>licenseKey</name>
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>entityId</name>
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>entityName</name>
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+         <event id="com.vmware.license.UnassignLicenseEvent">
+            <EventType>
+               <eventTypeID>com.vmware.license.UnassignLicenseEvent</eventTypeID>
+               <description>Unassigned license</description>
+               <arguments>
+                  <argument>
+                     <name>entityId</name>
+                     <type>string</type>
+                  </argument>
+                  <argument>
+                     <name>entityName</name>
+                     <type>string</type>
+                  </argument>
+               </arguments>
+            </EventType>
+         </event>
+      </events>
+      <tasks>
+         <!--  Example:
+         <task id="vim.task.Example1"/>
+         -->
+      </tasks>
+      <faults>
+         <!--  Example:
+         <fault id="vim.fault.Example1"/>
+         -->
+      </faults>
+   </extension>
+</config>

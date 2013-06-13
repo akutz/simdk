@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <extension>
+      <name>cim-ui</name>
+      <version>4.0</version>
+      <company>VMware, Inc.</company>
+      <description>
+         <label>vCenter Hardware Status</label>
+         <summary>Displays the hardware status of hosts (CIM monitoring)</summary>
+      </description>
+      <certificate>ssl\rui.crt</certificate>
+      <keyFile>ssl\rui.key</keyFile>
+      <servers>
+         <server>
+		      <url>https://kennebunkport.east.hyper9.com:8443/cim-ui/scriptConfig.xml</url>
+		      <description>vCenter Hardware Status</description>
+		      <company>VMware, Inc.</company>
+		      <type>com.vmware.vim.viClientScripts</type>
+		      <adminEmail>noreply@vmware.com</adminEmail>
+         </server>
+      </servers>
+   </extension>
+</config>

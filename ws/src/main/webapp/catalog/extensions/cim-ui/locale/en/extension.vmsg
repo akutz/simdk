@@ -1,0 +1,7 @@
+signature = "sIgNaTuRe"
+
+cim-ui.label = "vCenter Hardware Status"
+cim-ui.summary = "Displays the hardware status of hosts (CIM monitoring)"
+
+cim-ui.server.com.vmware.vim.viClientScripts.label = "vCenter Hardware Status"
+cim-ui.server.com.vmware.vim.viClientScripts.summary = "Displays the hardware status of hosts (CIM monitoring)"
